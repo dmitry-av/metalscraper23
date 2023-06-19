@@ -18,7 +18,7 @@ def parse_section(filename):
     files = [file for file in os.listdir(
         f'result/{subfolder}') if file.endswith('.csv')]
     counter = 0
-    driver = get_driver(proxypool=proxy_pool, visible="yes")
+    driver = get_driver(proxypool=proxy_pool)
     for item_type, sizes in subsections[section_name].items():
         print(f"parsing subsection: {item_type}")
         csv_name = list(sizes.values())[0].split('/')[4] + ".csv"
@@ -67,13 +67,13 @@ def parse_section(filename):
                     if counter >= 50:
                         driver.quit()
                         driver = get_driver(
-                            proxypool=proxy_pool, visible="yes")
+                            proxypool=proxy_pool)
                         counter = 0
                     break
                 except Exception as e:
                     print(e)
                     driver.quit()
-                    driver = get_driver(proxypool=proxy_pool, visible="yes")
+                    driver = get_driver(proxypool=proxy_pool)
                     continue
         result = pd.concat(df_list)
         result.to_csv(f'result/{subfolder}/{csv_name}', encoding='utf-8')
