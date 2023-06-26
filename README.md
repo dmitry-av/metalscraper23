@@ -1,32 +1,31 @@
-# Описание приложения
+# Application Description
 
-Данное приложение предназначено для сбора данных с веб-сайта (https://23met.ru/) и получения информации о ценах на различные товары в разных городах. Оно использует технику парсинга веб-страниц с помощью Selenium Chrome WebDriver.
+This application is designed to collect data from a website (https://23met.ru/) and retrieve information about prices for various products in different cities. It utilizes web page parsing technique using Selenium Chrome WebDriver.
 
-Приложение состоит из нескольких модулей:
+The application consists of several modules:
 
 ## main.py
 
-Функция `main()` отвечает за выполнение процесса парсинга. Она проверяет наличие JSON-файлов со списком url адресов подразделов и размеров в директории "urls/". Список url адресов обновляется, если прошло более 7 дней с получения последнего списка. 
+The main() function is responsible for executing the parsing process. It checks for the presence of JSON files with the list of sub-section URLs and sizes in the 'urls/' directory. The list of URLs is updated if more than 7 days have passed since the last list was obtained.
 
-`parse_section()` отвечает за парсинг конкретного раздела веб-сайта. Она принимает имя файла в качестве входных данных, читает подразделы из JSON-файла и выполняет итерацию по каждому подразделу. В каждом подразделе она получает данные для разных размеров товаров и сохраняет их в CSV-файлы.
+parse_section() is responsible for parsing a specific section of the website. It takes the file name as input, reads the sub-sections from the JSON file, and iterates over each sub-section. Within each sub-section, it retrieves data for different product sizes and saves them in CSV files.
 
 ## driver.py
 
-Функция `get_driver()` создает и возвращает объект Selenium WebDriver с опциональными настройками прокси и видимости. Она использует Chrome WebDriver, устанавливая его с помощью `ChromeDriverManager`. Если включено использование прокси, она выбирает следующий прокси из пула и добавляет его в настройки Chrome WebDriver. Если visible не задана, она запускает WebDriver в фоновом режиме.
+The get_driver() function creates and returns a Selenium WebDriver object with optional proxy and visibility settings. It uses the Chrome WebDriver, installing it with ChromeDriverManager. If proxy usage is enabled, it selects the next proxy from the pool and adds it to the Chrome WebDriver settings. If 'visible' is not specified, it launches the WebDriver in the background mode.
 
-Также создается пул прокси адресов, с которыми работает приложение.
+A pool of proxy addresses is also created, which the application works with.
 
 ## link_list.py
 
-Этот модуль содержит функции, связанные с получением и созданием списка URL-адресов. 
-`is_urls_expired()` проверяет, истек ли 7-дневый срок последнего получения URL-адресов. 
+This module contains functions related to obtaining and creating a list of URLs. The is_urls_expired() function checks if the 7-day period since the last retrieval of URLs has expired.
 
-Функция `get_section_urls()` получает URL-адреса разделов с помощью Selenium WebDriver. Она открывает веб-сайт, выбирает регион и сохраняет URL-адреса разделов в словаре.
+The get_section_urls() function retrieves section URLs using the Selenium WebDriver. It opens the website, selects the region, and saves the section URLs in a dictionary.
 
 ## Запуск приложения
 
-1. Установите все необходимые зависимости, указанные в файле `requirements.txt`.
+Install all the necessary dependencies listed in the requirements.txt file.
 
-2. Убедитесь, что у вас установлен Chrome WebDriver. Если он не установлен, приложение попытается установить его автоматически с помощью `ChromeDriverManager`.
+Make sure you have Chrome WebDriver installed. If it is not installed, the application will attempt to install it automatically using ChromeDriverManager.
 
-3. Запустите файл `main.py`, чтобы выполнить процесс парсинга. В ходе выполнения будет создано несколько CSV-файлов с данными о ценах.
+Run the main.py file to execute the parsing process. During execution, several CSV files will be created with price data.
