@@ -22,7 +22,7 @@ This module contains functions related to obtaining and creating a list of URLs.
 
 The get_section_urls() function retrieves section URLs using the Selenium WebDriver. It opens the website, selects the region, and saves the section URLs in a dictionary.
 
-## Запуск приложения
+## Running the Application
 
 Install all the necessary dependencies listed in the requirements.txt file.
 
